@@ -53,11 +53,18 @@
     "lodash": "^4.17.21",
     "lodash.get": "^4.4.2",
     "clj-fuzzy": "npm:talisman@^1.1.4",
-    "node-domexception": "^1.0.0"
+    "node-domexception": "^1.0.0",
+    "babel-runtime": "^7.24.0",
+    "words-to-numbers": {
+      "babel-runtime": "^7.24.0",
+      "core-js": "^3.36.0"
+    }
   },
   "resolutions": {
     "lodash.get": "^4.4.2",
     "clj-fuzzy": "npm:talisman@^1.1.4",
-    "node-domexception": "^1.0.0"
+    "node-domexception": "^1.0.0",
+    "babel-runtime": "^7.24.0",
+    "core-js": "^3.36.0"
   }
 }
