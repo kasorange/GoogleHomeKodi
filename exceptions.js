@@ -4,7 +4,7 @@
  * @param {*} status Optional status response code.
  * @param {*} statusText Optional status text, retreived from the responses status text.
  */
-module.exports.ResponseException = class ResponseException {
+export class ResponseException {
     constructor(message, status, statusText) {
         this.message = message;
         this.name = 'ResponseException';
@@ -15,4 +15,4 @@ module.exports.ResponseException = class ResponseException {
     toString() {
         console.log(`${this.message} (${this.status})`);
     }
-};
+}

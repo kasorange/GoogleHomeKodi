@@ -24,9 +24,9 @@ const showNotification = (request, response, message, image) => {
 };
 
 
-const express = require('express');
-const axios = require('axios');
-const { XMLParser } = require('fast-xml-parser');
+import express from 'express';
+import axios from 'axios';
+import { XMLParser } from 'fast-xml-parser';
 
 const feedUrl = 'https://www.tagesschau.de/export/video-podcast/webxl/tagesschau_https/';
 

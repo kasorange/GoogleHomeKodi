@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = [
+export default [
     {
         name: 'Addons',
         methods: ['ExecuteAddon', 'GetAddonDetails', 'GetAddons', 'SetAddonEnabled']
