@@ -1,10 +1,10 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import Helper from './helpers.js';
-import Broker from './broker.js';
-import LoadConfig from './config.js';
-import SettingsApp from './apps/settings.js';
-import TagesschauApp from './apps/tagesschau.js';
+import * as Helper from './helpers.js';
+import * as Broker from './broker.js';
+import * as LoadConfig from './config.js';
+import * as SettingsApp from './apps/settings.js';
+import * as TagesschauApp from './apps/tagesschau.js';
 import { ResponseException } from './exceptions.js';
 
 const app = express();

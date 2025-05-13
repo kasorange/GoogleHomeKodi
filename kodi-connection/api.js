@@ -1,4 +1,4 @@
-import namespaces from './api-methods.js';
+import * as namespaces from './api-methods.js';
 import { ResponseException } from '../exceptions.js';
 
 const api = (fetch) => {

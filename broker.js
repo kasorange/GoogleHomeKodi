@@ -1,4 +1,4 @@
-import Helper from './helpers.js';
+import * as Helper from './helpers.js';
 import path from 'path';
 import fs from 'fs';
 import accents from 'remove-accents';
