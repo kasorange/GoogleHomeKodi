@@ -1,7 +1,7 @@
 import { wordsToNumbers } from 'words-to-numbers';
 import axios from 'axios';
 import Fuse from 'fuse.js';
-import KodiWindows from './kodi-connection/windows.js';
+import { KodiWindows } from './kodi-connection/windows.js';
 
 const AUDIO_PLAYER = 0;
 const VIDEO_PLAYER = 1;
