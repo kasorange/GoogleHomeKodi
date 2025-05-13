@@ -18,7 +18,10 @@
     "node-fetch": "^3.3.2",
     "words-to-numbers": "^1.5.1",
     "remove-accents": "^0.4.2",
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "glob": "^10.3.10",
+    "talisman": "^1.1.4",
+    "core-js": "^3.36.0"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.23.10",
@@ -41,5 +44,10 @@
     "Google Home",
     "IFTTT"
   ],
-  "type": "module"
+  "type": "module",
+  "overrides": {
+    "glob": "^10.3.10",
+    "core-js": "^3.36.0",
+    "talisman": "^1.1.4"
+  }
 }
