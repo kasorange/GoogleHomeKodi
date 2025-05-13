@@ -22,7 +22,9 @@
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.23.10",
-    "eslint": "^8.57.0",
+    "@eslint/eslintrc": "^3.0.0",
+    "@eslint/js": "^9.0.0",
+    "eslint": "^9.0.0",
     "mocha": "^10.3.0",
     "node-mocks-http": "^1.13.0",
     "should": "^13.2.3"
@@ -31,7 +33,7 @@
     "node": ">=18.0.0"
   },
   "repository": {
-    "url": "https://github.com/OmerTu/GoogleHomeKodi"
+    "url": "https://github.com/kasorange/GoogleHomeKodi"
   },
   "license": "MIT",
   "keywords": [
