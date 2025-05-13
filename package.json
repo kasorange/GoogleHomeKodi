@@ -54,9 +54,9 @@
     "lodash.get": "^4.4.2",
     "clj-fuzzy": "npm:talisman@^1.1.4",
     "node-domexception": "^1.0.0",
-    "babel-runtime": "^7.24.0",
+    "@babel/runtime": "^7.23.8",
     "words-to-numbers": {
-      "babel-runtime": "^7.24.0",
+      "@babel/runtime": "^7.23.8",
       "core-js": "^3.36.0"
     }
   },
@@ -64,7 +64,7 @@
     "lodash.get": "^4.4.2",
     "clj-fuzzy": "npm:talisman@^1.1.4",
     "node-domexception": "^1.0.0",
-    "babel-runtime": "^7.24.0",
+    "@babel/runtime": "^7.23.8",
     "core-js": "^3.36.0"
   }
 }
