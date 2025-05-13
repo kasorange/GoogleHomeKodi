@@ -1,7 +1,7 @@
 import { wordsToNumbers } from 'words-to-numbers';
 import axios from 'axios';
 import Fuse from 'fuse.js';
-import { KodiWindows } from './kodi-connection/windows.js';
+import { getFlatWindows } from './kodi-connection/windows.js';
 
 const AUDIO_PLAYER = 0;
 const VIDEO_PLAYER = 1;
@@ -624,7 +624,7 @@ export const kodiShowWindow = (request, response) => { // eslint-disable-line no
 
     const query = request.query.q;
 
-    return fuzzySearchBestMatch(KodiWindows, query)
+    return fuzzySearchBestMatch(getFlatWindows(), query)
         .then((window) => showWindow(request.kodi, window));
 };
 

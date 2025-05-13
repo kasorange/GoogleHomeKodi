@@ -129,7 +129,7 @@ const KodiWindows = [
     { 'subtitlesearch': [{ 'subtitle download': 'subtitlesearch' }] }
 ];
 
-module.exports = function() {
+export function getFlatWindows() {
     let flatWindows = [];
 
     KodiWindows.map((windowsSection) => {
@@ -150,4 +150,6 @@ module.exports = function() {
     });
 
     return flatWindows;
-};
+}
+
+export { KodiWindows };
