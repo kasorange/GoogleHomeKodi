@@ -1,5 +1,5 @@
 import { wordsToNumbers } from 'words-to-numbers';
-import youtubeSearch from 'youtube-search';
+import axios from 'axios';
 import Fuse from 'fuse.js';
 import KodiWindows from './kodi-connection/windows.js';
 
@@ -1239,58 +1239,49 @@ export const kodiPlayYoutube = (request, response) => { // eslint-disable-line n
         throw new Error('Youtube key missing. Configure using the env. variable YOUTUBE_KEY or the kodi-hosts.config.js.');
     }
 
-    // Search youtube
+    // Search youtube using YouTube Data API v3
     console.log(`Searching youtube for ${searchString}`);
-    const opts = {
-        maxResults: maxItems,
-        key: request.config.youtubeKey,
-        type: 'video'
-    };
-
-    return new Promise((resolve, reject) =>
-        youtubeSearch(searchString, opts, (err, results) => {
-            if (err) {
-                reject(err);
-            }
-
-            if (!results || results.length === 0) {
-                reject('no results found');
-            }
-
-            resolve(results);
-
-        })).then((foundVideos) => {
-
-        let items = foundVideos
-            .filter((video) => video.filetype === 'file' || video.kind === 'youtube#video')
-            .map((video) => ({
-                file: `plugin://plugin.video.youtube/play/?video_id=${video.id}`
-            }));
-
-        if (items.length === 0) {
-            console.log(foundVideos);
-            return new Error(`No playable videos found!`);
+    
+    return axios.get('https://www.googleapis.com/youtube/v3/search', {
+        params: {
+            part: 'snippet',
+            maxResults: maxItems,
+            q: searchString,
+            type: 'video',
+            key: request.config.youtubeKey
         }
+    })
+    .then(response => {
+        const videos = response.data.items;
+        
+        if (!videos || videos.length === 0) {
+            throw new Error('No results found');
+        }
+
+        const items = videos.map(video => ({
+            file: `plugin://plugin.video.youtube/play/?video_id=${video.id.videoId}`
+        }));
 
         console.log(`Playing ${items.length} youtube videos:`);
 
         return kodi.Playlist.Clear({ // eslint-disable-line new-cap
             playlistid: VIDEO_PLAYER
         })
-            .then(() => kodi.Playlist.Add({ // eslint-disable-line new-cap
-                item: items,
+        .then(() => kodi.Playlist.Add({ // eslint-disable-line new-cap
+            item: items,
+            playlistid: VIDEO_PLAYER
+        }))
+        .then(() => kodi.Player.Open({ // eslint-disable-line new-cap
+            item: {
                 playlistid: VIDEO_PLAYER
-            }))
-            .then(() => kodi.Player.Open({ // eslint-disable-line new-cap
-                item: {
-                    playlistid: VIDEO_PLAYER
-                },
-                options: {
-                    shuffled: false
-                }
-            })).then(() => kodi.GUI.SetFullscreen({ // eslint-disable-line new-cap
-                fullscreen: true
-            }));
+            },
+            options: {
+                shuffled: false
+            }
+        }))
+        .then(() => kodi.GUI.SetFullscreen({ // eslint-disable-line new-cap
+            fullscreen: true
+        }));
     });
 };
 
