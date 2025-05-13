@@ -100,4 +100,18 @@ const matchPhraseToEndpoint = (request) => {
     throw new Error(`Broker unknown phrase: '${phrase}' (${language})`);
 };
 
+const processRequest = async (request, response) => {
+    try {
+        const endpoint = matchPhraseToEndpoint(request);
+        if (typeof Helper[endpoint] === 'function') {
+            await Helper[endpoint](request, response);
+        } else {
+            throw new Error(`Endpoint '${endpoint}' not found in Helper`);
+        }
+    } catch (error) {
+        console.error('Error processing request:', error);
+        response.status(500).send(error.message);
+    }
+};
+
 export { matchPhraseToEndpoint, processRequest };
