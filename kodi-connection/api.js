@@ -1,9 +1,7 @@
-'use strict';
+import namespaces from './api-methods.js';
+import { ResponseException } from '../exceptions.js';
 
-const namespaces = require('./api-methods.js');
-const ResponseException = require('../exceptions.js').ResponseException;
-
-module.exports = (fetch) => {
+const api = (fetch) => {
 
     const addMethods = (obj) => {
         namespaces.forEach((namespace) => {
@@ -69,3 +67,5 @@ module.exports = (fetch) => {
 
     return Kodi;
 };
+
+export default api;

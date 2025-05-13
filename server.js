@@ -1,15 +1,13 @@
-'use strict'; // eslint-disable-line strict
+import express from 'express';
+import bodyParser from 'body-parser';
+import Helper from './helpers.js';
+import Broker from './broker.js';
+import LoadConfig from './config.js';
+import SettingsApp from './apps/settings.js';
+import TagesschauApp from './apps/tagesschau.js';
+import { ResponseException } from './exceptions.js';
 
-const express = require('express');
 const app = express();
-const Helper = require('./helpers.js');
-const Broker = require('./broker.js');
-const bodyParser = require('body-parser');
-const LoadConfig = require('./config.js');
-const SettingsApp = require('./apps/settings.js');
-const TagesschauApp = require('./apps/tagesschau.js');
-const ResponseException = require('./exceptions.js').ResponseException;
-
 const config = new LoadConfig();
 
 const handleError = (error, request, response, next) => { // eslint-disable-line no-unused-vars

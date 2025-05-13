@@ -1,9 +1,7 @@
-'use strict';
-
-const Helper = require('./helpers.js');
-const path = require('path');
-const fs = require('fs');
-const accents = require('remove-accents');
+import Helper from './helpers.js';
+import path from 'path';
+import fs from 'fs';
+import accents from 'remove-accents';
 
 let lastUsedLanguage = ``;
 let localizedPhrases = null;
@@ -23,7 +21,7 @@ const testRegexNamedGroupesFeature = () => {
     }
 };
 
-const loadLanguageFile = (language) => {
+const loadLanguageFile = async (language) => {
 
     try {
         let configDirectory = '/config';
@@ -32,24 +30,20 @@ const loadLanguageFile = (language) => {
             let configFile = process.env.GOOGLE_HOME_KODI_CONFIG || './kodi-hosts.config.js';
 
             configDirectory = path.dirname(fs.realpathSync(configFile));
-            // eslint-disable-next-line global-require
-            let lang = require(`${configDirectory}/${language}.json`);
+            let lang = (await import(`${configDirectory}/${language}.json`, { assert: { type: 'json' } })).default;
             console.log(`Found customized language file for '${language}'.`);
             return lang;
         } catch (error) {
             // NOOP
         }
 
-        // eslint-disable-next-line global-require
-        let lang = require(`${configDirectory}/${language}.json`);
+        let lang = (await import(`${configDirectory}/${language}.json`, { assert: { type: 'json' } })).default;
         console.log(`Found customized language file for '${language}'`);
         return lang;
 
     } catch (error) {
         console.log(`No customized language file found for '${language}', loading default file.`);
-
-        // eslint-disable-next-line global-require
-        return require(`./broker/${language}.json`);
+        return (await import(`./broker/${language}.json`, { assert: { type: 'json' } })).default;
     }
 };
 
@@ -106,17 +100,4 @@ const matchPhraseToEndpoint = (request) => {
     throw new Error(`Broker unknown phrase: '${phrase}' (${language})`);
 };
 
-exports.matchPhraseToEndpoint = matchPhraseToEndpoint;
-
-exports.processRequest = (request, response) => {
-    let endpointKey = matchPhraseToEndpoint(request, response);
-    let endpoint = endpointKey.split(`:`, 1)[0];
-
-    let legacyRoute = Helper[endpoint];
-    if (legacyRoute) {
-        return Helper[endpoint](request, response);
-    }
-
-    request.url = `/${endpoint}`;
-    return Promise.resolve(request.app.handle(request, response));
-};
+export { matchPhraseToEndpoint, processRequest };

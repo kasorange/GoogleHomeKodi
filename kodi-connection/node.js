@@ -1,3 +1,4 @@
-'use strict';
+import fetch from 'node-fetch';
+import api from './api.js';
 
-module.exports = require('./api.js')(require('node-fetch'));
+export default api(fetch);

@@ -1,9 +1,7 @@
-'use strict'; // eslint-disable-line strict
-
-const { wordsToNumbers } = require('words-to-numbers');
-const youtubeSearch = require('youtube-search');
-const Fuse = require('fuse.js');
-const KodiWindows = require('./kodi-connection/windows.js')();
+import { wordsToNumbers } from 'words-to-numbers';
+import youtubeSearch from 'youtube-search';
+import Fuse from 'fuse.js';
+import KodiWindows from './kodi-connection/windows.js';
 
 const AUDIO_PLAYER = 0;
 const VIDEO_PLAYER = 1;
@@ -524,7 +522,7 @@ const kodiGoTo = (Kodi, gotoCommand) => {
     ]);
 };
 
-exports.kodiPlayPause = (request, response) => { // eslint-disable-line no-unused-vars
+export const kodiPlayPause = (request, response) => { // eslint-disable-line no-unused-vars
     console.log('Play/Pause request received');
     let Kodi = request.kodi;
 
@@ -537,7 +535,7 @@ exports.kodiPlayPause = (request, response) => { // eslint-disable-line no-unuse
 // Navigation Controls
 
 // Navigation Down
-exports.kodiNavDown = (request, response) => { // eslint-disable-line no-unused-vars
+export const kodiNavDown = (request, response) => { // eslint-disable-line no-unused-vars
     console.log('Navigate down request received');
     let Kodi = request.kodi;
     const times = getRequestedNumberOrDefaulValue(request, 1);
@@ -546,7 +544,7 @@ exports.kodiNavDown = (request, response) => { // eslint-disable-line no-unused-
 };
 
 // Navigation Up
-exports.kodiNavUp = (request, response) => { // eslint-disable-line no-unused-vars
+export const kodiNavUp = (request, response) => { // eslint-disable-line no-unused-vars
     console.log('Navigate up request received');
     let Kodi = request.kodi;
     const times = getRequestedNumberOrDefaulValue(request, 1);
@@ -555,7 +553,7 @@ exports.kodiNavUp = (request, response) => { // eslint-disable-line no-unused-va
 };
 
 // Navigation Left
-exports.kodiNavLeft = (request, response) => { // eslint-disable-line no-unused-vars
+export const kodiNavLeft = (request, response) => { // eslint-disable-line no-unused-vars
     console.log('Navigate left request received');
     let Kodi = request.kodi;
     const times = getRequestedNumberOrDefaulValue(request, 1);
@@ -565,7 +563,7 @@ exports.kodiNavLeft = (request, response) => { // eslint-disable-line no-unused-
 };
 
 // Navigation Right
-exports.kodiNavRight = (request, response) => { // eslint-disable-line no-unused-vars
+export const kodiNavRight = (request, response) => { // eslint-disable-line no-unused-vars
     console.log('Navigate right request received');
     let Kodi = request.kodi;
     const times = getRequestedNumberOrDefaulValue(request, 1);
@@ -574,7 +572,7 @@ exports.kodiNavRight = (request, response) => { // eslint-disable-line no-unused
 };
 
 // Navigation Back
-exports.kodiNavBack = (request, response) => { // eslint-disable-line no-unused-vars
+export const kodiNavBack = (request, response) => { // eslint-disable-line no-unused-vars
     console.log('Navigate back request received');
     let Kodi = request.kodi;
     const times = getRequestedNumberOrDefaulValue(request, 1);
@@ -583,7 +581,7 @@ exports.kodiNavBack = (request, response) => { // eslint-disable-line no-unused-
 };
 
 // Navigation Select
-exports.kodiNavSelect = (request, response) => { // eslint-disable-line no-unused-vars
+export const kodiNavSelect = (request, response) => { // eslint-disable-line no-unused-vars
     console.log('Navigation select request received');
     let Kodi = request.kodi;
 
@@ -591,7 +589,7 @@ exports.kodiNavSelect = (request, response) => { // eslint-disable-line no-unuse
 };
 
 // Navigation ContextMenu
-exports.kodiNavContextMenu = (request, response) => { // eslint-disable-line no-unused-vars
+export const kodiNavContextMenu = (request, response) => { // eslint-disable-line no-unused-vars
     console.log('Navigation ContextMenu request received');
     let Kodi = request.kodi;
 
@@ -599,7 +597,7 @@ exports.kodiNavContextMenu = (request, response) => { // eslint-disable-line no-
 };
 
 // Show Info
-exports.kodiDisplayInfo = (request, response) => { // eslint-disable-line no-unused-vars
+export const kodiDisplayInfo = (request, response) => { // eslint-disable-line no-unused-vars
     console.log('Display information request received');
     let Kodi = request.kodi;
 
@@ -607,7 +605,7 @@ exports.kodiDisplayInfo = (request, response) => { // eslint-disable-line no-unu
 };
 
 // Navigation Home
-exports.kodiNavHome = (request, response) => { // eslint-disable-line no-unused-vars
+export const kodiNavHome = (request, response) => { // eslint-disable-line no-unused-vars
     console.log('Navigation Home request received');
     let Kodi = request.kodi;
 
@@ -621,7 +619,7 @@ const showWindow = (kodi, window) => {
     });
 };
 
-exports.kodiShowWindow = (request, response) => { // eslint-disable-line no-unused-vars
+export const kodiShowWindow = (request, response) => { // eslint-disable-line no-unused-vars
     console.log('Show window request received');
 
     const query = request.query.q;
@@ -631,7 +629,7 @@ exports.kodiShowWindow = (request, response) => { // eslint-disable-line no-unus
 };
 
 // Set subtitles
-exports.kodiSetSubs = (request, response) => { // eslint-disable-line no-unused-vars
+export const kodiSetSubs = (request, response) => { // eslint-disable-line no-unused-vars
     let Kodi = request.kodi;
     const setsubs = request.query.q.trim();
 
@@ -645,7 +643,7 @@ exports.kodiSetSubs = (request, response) => { // eslint-disable-line no-unused-
 };
 
 // Set subtitles on
-exports.kodiSetSubsOn = (request, response) => { // eslint-disable-line no-unused-vars
+export const kodiSetSubsOn = (request, response) => { // eslint-disable-line no-unused-vars
     let Kodi = request.kodi;
 
     console.log('Change subtitles on received');
@@ -654,7 +652,7 @@ exports.kodiSetSubsOn = (request, response) => { // eslint-disable-line no-unuse
 };
 
 // Set subtitles off
-exports.kodiSetSubsOff = (request, response) => { // eslint-disable-line no-unused-vars
+export const kodiSetSubsOff = (request, response) => { // eslint-disable-line no-unused-vars
     let Kodi = request.kodi;
 
     console.log('Change subtitles off received');
@@ -663,7 +661,7 @@ exports.kodiSetSubsOff = (request, response) => { // eslint-disable-line no-unus
 };
 
 // Set subtitles previous
-exports.kodiSetSubsPrevious = (request, response) => { // eslint-disable-line no-unused-vars
+export const kodiSetSubsPrevious = (request, response) => { // eslint-disable-line no-unused-vars
     let Kodi = request.kodi;
 
     console.log('Change subtitles previous received');
@@ -672,7 +670,7 @@ exports.kodiSetSubsPrevious = (request, response) => { // eslint-disable-line no
 };
 
 // Set subtitles next
-exports.kodiSetSubsNext = (request, response) => { // eslint-disable-line no-unused-vars
+export const kodiSetSubsNext = (request, response) => { // eslint-disable-line no-unused-vars
     let Kodi = request.kodi;
 
     console.log('Change subtitles next received');
@@ -681,7 +679,7 @@ exports.kodiSetSubsNext = (request, response) => { // eslint-disable-line no-unu
 };
 
 // Set subtitles direct
-exports.kodiSetSubsDirect = (request, response) => { // eslint-disable-line no-unused-vars
+export const kodiSetSubsDirect = (request, response) => { // eslint-disable-line no-unused-vars
     let Kodi = request.kodi;
     const setsubs = getRequestedNumberOrDefaulValue(request, 0);
 
@@ -694,7 +692,7 @@ exports.kodiSetSubsDirect = (request, response) => { // eslint-disable-line no-u
 };
 
 // Set audiostream
-exports.kodiSetAudio = (request, response) => { // eslint-disable-line no-unused-vars
+export const kodiSetAudio = (request, response) => { // eslint-disable-line no-unused-vars
     let Kodi = request.kodi;
     const setaudiostream = request.query.q.trim();
 
@@ -711,7 +709,7 @@ exports.kodiSetAudio = (request, response) => { // eslint-disable-line no-unused
 };
 
 // Set audiostream direct
-exports.kodiSetAudioDirect = (request, response) => { // eslint-disable-line no-unused-vars
+export const kodiSetAudioDirect = (request, response) => { // eslint-disable-line no-unused-vars
     let Kodi = request.kodi;
     const setaudiostream = getRequestedNumberOrDefaulValue(request, 0);
 
@@ -725,7 +723,7 @@ exports.kodiSetAudioDirect = (request, response) => { // eslint-disable-line no-
 };
 
 // Go to x minutes
-exports.kodiSeektominutes = (request, response) => { // eslint-disable-line no-unused-vars
+export const kodiSeektominutes = (request, response) => { // eslint-disable-line no-unused-vars
     console.log('Skip to x minutes request received');
     let Kodi = request.kodi;
 
@@ -742,7 +740,7 @@ exports.kodiSeektominutes = (request, response) => { // eslint-disable-line no-u
 };
 
 // Seek x minutes forwards
-exports.kodiSeekForwardMinutes = (request, response) => { // eslint-disable-line no-unused-vars
+export const kodiSeekForwardMinutes = (request, response) => { // eslint-disable-line no-unused-vars
     console.log('Seek x minutes forwards request received');
     let Kodi = request.kodi;
 
@@ -757,7 +755,7 @@ exports.kodiSeekForwardMinutes = (request, response) => { // eslint-disable-line
 };
 
 // Seek x minutes backwards
-exports.kodiSeekBackwardMinutes = (request, response) => { // eslint-disable-line no-unused-vars
+export const kodiSeekBackwardMinutes = (request, response) => { // eslint-disable-line no-unused-vars
     console.log('Seek x minutes backward request received');
     let Kodi = request.kodi;
 
@@ -772,7 +770,7 @@ exports.kodiSeekBackwardMinutes = (request, response) => { // eslint-disable-lin
 };
 
 // Play Song
-exports.kodiPlaySong = (request, response) => { // eslint-disable-line no-unused-vars
+export const kodiPlaySong = (request, response) => { // eslint-disable-line no-unused-vars
     tryActivateTv(request, response);
 
     let songTitle = request.query.q;
@@ -788,7 +786,7 @@ exports.kodiPlaySong = (request, response) => { // eslint-disable-line no-unused
 };
 
 // Play Artist
-exports.kodiPlayArtist = (request, response) => { // eslint-disable-line no-unused-vars
+export const kodiPlayArtist = (request, response) => { // eslint-disable-line no-unused-vars
     tryActivateTv(request, response);
 
     let artistTitle = request.query.q;
@@ -807,7 +805,7 @@ exports.kodiPlayArtist = (request, response) => { // eslint-disable-line no-unus
 };
 
 // Play Album
-exports.kodiPlayAlbum = (request, response) => { // eslint-disable-line no-unused-vars
+export const kodiPlayAlbum = (request, response) => { // eslint-disable-line no-unused-vars
     tryActivateTv(request, response);
 
     let albumTitle = request.query.q;
@@ -822,7 +820,7 @@ exports.kodiPlayAlbum = (request, response) => { // eslint-disable-line no-unuse
         }));
 };
 
-exports.kodiShuffleAlbum = (request, response) => { // eslint-disable-line no-unused-vars
+export const kodiShuffleAlbum = (request, response) => { // eslint-disable-line no-unused-vars
     tryActivateTv(request, response);
 
     let albumTitle = request.query.q;
@@ -841,7 +839,7 @@ exports.kodiShuffleAlbum = (request, response) => { // eslint-disable-line no-un
 };
 
 // Player Control
-exports.playercontrol = (request, response) => { // eslint-disable-line no-unused-vars
+export const playercontrol = (request, response) => { // eslint-disable-line no-unused-vars
     let Kodi = request.kodi;
     const playercommand = request.query.q.trim();
 
@@ -857,7 +855,7 @@ exports.playercontrol = (request, response) => { // eslint-disable-line no-unuse
     return kodiGoTo(Kodi, playlistindex);
 };
 
-exports.kodiPlayPlaylist = (request, response) => { // eslint-disable-line no-unused-vars
+export const kodiPlayPlaylist = (request, response) => { // eslint-disable-line no-unused-vars
     let Kodi = request.kodi;
     const playlistName = request.query.q.trim();
 
@@ -875,7 +873,7 @@ exports.kodiPlayPlaylist = (request, response) => { // eslint-disable-line no-un
         }));
 };
 
-exports.playItemOfDirectory = (request, response) => { // eslint-disable-line no-unused-vars
+export const playItemOfDirectory = (request, response) => { // eslint-disable-line no-unused-vars
     let Kodi = request.kodi;
     const needle = request.query.q.trim();
     const directory = request.query.directory.trim();
@@ -891,7 +889,7 @@ exports.playItemOfDirectory = (request, response) => { // eslint-disable-line no
         }));
 };
 
-exports.kodiStop = (request, response) => { // eslint-disable-line no-unused-vars
+export const kodiStop = (request, response) => { // eslint-disable-line no-unused-vars
     console.log('Stop request received');
     let Kodi = request.kodi;
 
@@ -901,7 +899,7 @@ exports.kodiStop = (request, response) => { // eslint-disable-line no-unused-var
     ]);
 };
 
-exports.kodiMuteToggle = (request, response) => { // eslint-disable-line no-unused-vars
+export const kodiMuteToggle = (request, response) => { // eslint-disable-line no-unused-vars
     console.log('mute/unmute request received');
     let Kodi = request.kodi;
 
@@ -920,7 +918,7 @@ const setVolume = (Kodi, volume) => {
     });
 };
 
-exports.kodiSetVolume = (request, response) => { // eslint-disable-line no-unused-vars
+export const kodiSetVolume = (request, response) => { // eslint-disable-line no-unused-vars
     const requestedVolume = getRequestedNumberOrDefaulValue(request, 50);
     let Kodi = request.kodi;
 
@@ -928,7 +926,7 @@ exports.kodiSetVolume = (request, response) => { // eslint-disable-line no-unuse
     return setVolume(Kodi, requestedVolume);
 };
 
-exports.kodiIncreaseVolume = (request, response) => { // eslint-disable-line no-unused-vars
+export const kodiIncreaseVolume = (request, response) => { // eslint-disable-line no-unused-vars
     let Kodi = request.kodi;
     let delta = getRequestedNumberOrDefaulValue(request, 20);
 
@@ -942,7 +940,7 @@ exports.kodiIncreaseVolume = (request, response) => { // eslint-disable-line no-
     });
 };
 
-exports.kodiDecreaseVolume = (request, response) => { // eslint-disable-line no-unused-vars
+export const kodiDecreaseVolume = (request, response) => { // eslint-disable-line no-unused-vars
     let Kodi = request.kodi;
     let delta = getRequestedNumberOrDefaulValue(request, 20);
 
@@ -956,7 +954,7 @@ exports.kodiDecreaseVolume = (request, response) => { // eslint-disable-line no-
     });
 };
 
-exports.kodiActivateTv = (request, response) => { // eslint-disable-line no-unused-vars
+export const kodiActivateTv = (request, response) => { // eslint-disable-line no-unused-vars
     console.log('Activate TV request received');
 
     let Kodi = request.kodi;
@@ -970,7 +968,7 @@ exports.kodiActivateTv = (request, response) => { // eslint-disable-line no-unus
     return Kodi.Addons.ExecuteAddon(params); // eslint-disable-line new-cap
 };
 
-exports.kodiStandbyTv = (request, response) => { // eslint-disable-line no-unused-vars
+export const kodiStandbyTv = (request, response) => { // eslint-disable-line no-unused-vars
     console.log('Standby TV request received');
 
     let Kodi = request.kodi;
@@ -984,7 +982,7 @@ exports.kodiStandbyTv = (request, response) => { // eslint-disable-line no-unuse
     return Kodi.Addons.ExecuteAddon(params); // eslint-disable-line new-cap
 };
 
-exports.kodiPlayRandomMovie = (request, response) => { // eslint-disable-line no-unused-vars
+export const kodiPlayRandomMovie = (request, response) => { // eslint-disable-line no-unused-vars
     tryActivateTv(request, response);
 
     console.log(`Random movie request received`);
@@ -1003,7 +1001,7 @@ exports.kodiPlayRandomMovie = (request, response) => { // eslint-disable-line no
         .then((movie) => playMovie(request, movie));
 };
 
-exports.kodiPlayFile = (request, response) => {
+export const kodiPlayFile = (request, response) => {
     tryActivateTv(request, response);
 
     let file = request.query.q;
@@ -1013,7 +1011,7 @@ exports.kodiPlayFile = (request, response) => {
     return sleep(seconds)
         .then(() => playFile(request, file));
 };
-exports.kodiPlayMovie = (request, response) => {
+export const kodiPlayMovie = (request, response) => {
     tryActivateTv(request, response);
 
     let movieTitle = request.query.q;
@@ -1025,7 +1023,7 @@ exports.kodiPlayMovie = (request, response) => {
         .then((movie) => playMovie(request, movie));
 };
 
-exports.kodiResumeMovie = (request, response) => {
+export const kodiResumeMovie = (request, response) => {
     tryActivateTv(request, response);
 
     let movieTitle = request.query.q;
@@ -1037,7 +1035,7 @@ exports.kodiResumeMovie = (request, response) => {
         .then((movie) => resumeMovie(request, movie));
 };
 
-exports.kodiPlayTvshow = (request, response) => { // eslint-disable-line no-unused-vars
+export const kodiPlayTvshow = (request, response) => { // eslint-disable-line no-unused-vars
     tryActivateTv(request, response);
     let tvshowTitle = request.query.q;
     let seconds = request.query.delay !== undefined ? parseInt(request.query.delay) : 0;
@@ -1050,7 +1048,7 @@ exports.kodiPlayTvshow = (request, response) => { // eslint-disable-line no-unus
         .then((episode) => playTvShowEpisode(request, episode));
 };
 
-exports.kodiResumeTvshow = (request, response) => { // eslint-disable-line no-unused-vars
+export const kodiResumeTvshow = (request, response) => { // eslint-disable-line no-unused-vars
     tryActivateTv(request, response);
     let tvshowTitle = request.query.q;
     let seconds = request.query.delay !== undefined ? parseInt(request.query.delay) : 0;
@@ -1064,7 +1062,7 @@ exports.kodiResumeTvshow = (request, response) => { // eslint-disable-line no-un
         .then((episode) => resumeTvShowEpisode(request, episode));
 };
 
-exports.kodiBingeWatchTvshow = (request, response) => { // eslint-disable-line no-unused-vars
+export const kodiBingeWatchTvshow = (request, response) => { // eslint-disable-line no-unused-vars
     tryActivateTv(request, response);
     let tvshowTitle = request.query.q;
 
@@ -1076,7 +1074,7 @@ exports.kodiBingeWatchTvshow = (request, response) => { // eslint-disable-line n
         .then((unwatchedEpisodes) => playTvShowEpisodes(request, unwatchedEpisodes));
 };
 
-exports.kodiPlayEpisodeHandler = (request, response) => { // eslint-disable-line no-unused-vars
+export const kodiPlayEpisodeHandler = (request, response) => { // eslint-disable-line no-unused-vars
     tryActivateTv(request, response);
     let splitter = request.query.splitter || 'season';
     let fullQuery = request.query.q.toLowerCase();
@@ -1097,7 +1095,7 @@ exports.kodiPlayEpisodeHandler = (request, response) => { // eslint-disable-line
         .then((episode) => playTvShowEpisode(request, episode));
 };
 
-exports.kodiPlayRecentEpisodeHandler = (request, response) => { // eslint-disable-line no-unused-vars
+export const kodiPlayRecentEpisodeHandler = (request, response) => { // eslint-disable-line no-unused-vars
     tryActivateTv(request, response);
 
     console.log(`Play most recently added episode request received`);
@@ -1105,7 +1103,7 @@ exports.kodiPlayRecentEpisodeHandler = (request, response) => { // eslint-disabl
         .then((episode) => playTvShowEpisode(request, episode));
 };
 
-exports.kodiShuffleEpisodeHandler = (request, response) => { // eslint-disable-line no-unused-vars
+export const kodiShuffleEpisodeHandler = (request, response) => { // eslint-disable-line no-unused-vars
     tryActivateTv(request, response);
     let tvShowTitle = request.query.q;
 
@@ -1117,7 +1115,7 @@ exports.kodiShuffleEpisodeHandler = (request, response) => { // eslint-disable-l
         .then((episode) => playTvShowEpisode(request, episode));
 };
 
-exports.kodiShuffleShowHandler = (request, response) => { // eslint-disable-line no-unused-vars
+export const kodiShuffleShowHandler = (request, response) => { // eslint-disable-line no-unused-vars
     tryActivateTv(request, response);
     let tvShowTitle = request.query.q;
 
@@ -1128,14 +1126,14 @@ exports.kodiShuffleShowHandler = (request, response) => { // eslint-disable-line
         .then((episodes) => playTvShowEpisodes(request, episodes, true));
 };
 
-exports.kodiOpenTvshow = (request) => {
+export const kodiOpenTvshow = (request) => {
     let tvshowTitle = request.query.q;
 
     return kodiFindTvShow(request, tvshowTitle)
         .then((tvShow) => kodiOpenVideoWindow(tvShow.file, request.kodi));
 };
 
-exports.kodiOpenMovie = (request) => {
+export const kodiOpenMovie = (request) => {
     let movieTitle = request.query.q;
     let kodi = request.kodi;
 
@@ -1158,10 +1156,10 @@ exports.kodiOpenMovie = (request) => {
 };
 
 // Start a full library scan
-exports.kodiScanLibrary = (request) => request.kodi.VideoLibrary.Scan(); // eslint-disable-line new-cap
-exports.kodiCleanLibrary = (request) => request.kodi.VideoLibrary.Clean(); // eslint-disable-line new-cap
+export const kodiScanLibrary = (request) => request.kodi.VideoLibrary.Scan(); // eslint-disable-line new-cap
+export const kodiCleanLibrary = (request) => request.kodi.VideoLibrary.Clean(); // eslint-disable-line new-cap
 
-const kodiShowNotification = (request, response, message, image) => {
+export const kodiShowNotification = (request, response, message, image) => {
     let param = {
         title: 'GoogleHomeKodi',
         message: message,
@@ -1171,7 +1169,7 @@ const kodiShowNotification = (request, response, message, image) => {
     return request.kodi.GUI.ShowNotification(param); // eslint-disable-line new-cap
 };
 
-exports.kodiTestConnection = (request, response) => {
+export const kodiTestConnection = (request, response) => {
     return kodiShowNotification(request, response, 'Test Successful!', 'info')
         .then((result) => {
             console.log('Check your kodi screen for the notification!');
@@ -1180,11 +1178,11 @@ exports.kodiTestConnection = (request, response) => {
         });
 };
 
-exports.kodiShowError = (request, response, message) => {
+export const kodiShowError = (request, response, message) => {
     return kodiShowNotification(request, response, message, 'error');
 };
 
-const kodiPlayChannelByName = (request, response, channelGroupId) => { // eslint-disable-line no-unused-vars
+export const kodiPlayChannelByName = (request, response, channelGroupId) => { // eslint-disable-line no-unused-vars
     tryActivateTv(request, response);
     let requestedChannel = request.query.q.trim();
 
@@ -1193,7 +1191,7 @@ const kodiPlayChannelByName = (request, response, channelGroupId) => { // eslint
         .then((channel) => kodiPlayChannel(request, channel));
 };
 
-const kodiPlayChannelByNumber = (request, response, channelGroupId) => { // eslint-disable-line no-unused-vars
+export const kodiPlayChannelByNumber = (request, response, channelGroupId) => { // eslint-disable-line no-unused-vars
     tryActivateTv(request, response);
 
     let requestedChannel = getRequestedNumberOrDefaulValue(request, -1).toString();
@@ -1207,24 +1205,24 @@ const kodiPlayChannelByNumber = (request, response, channelGroupId) => { // esli
         .then((channel) => kodiPlayChannel(request, channel));
 };
 
-exports.kodiPlayTvChannelByName = (request, response) => { // eslint-disable-line no-unused-vars
+export const kodiPlayTvChannelByName = (request, response) => { // eslint-disable-line no-unused-vars
     return kodiPlayChannelByName(request, response, 'alltv');
 };
 
-exports.kodiPlayTvChannelByNumber = (request, response) => { // eslint-disable-line no-unused-vars
+export const kodiPlayTvChannelByNumber = (request, response) => { // eslint-disable-line no-unused-vars
     return kodiPlayChannelByNumber(request, response, 'alltv');
 };
 
-exports.kodiPlayRadioChannelByName = (request, response) => { // eslint-disable-line no-unused-vars
+export const kodiPlayRadioChannelByName = (request, response) => { // eslint-disable-line no-unused-vars
     return kodiPlayChannelByName(request, response, 'allradio');
 };
 
-exports.kodiPlayRadioChannelByNumber = (request, response) => { // eslint-disable-line no-unused-vars
+export const kodiPlayRadioChannelByNumber = (request, response) => { // eslint-disable-line no-unused-vars
     return kodiPlayChannelByNumber(request, response, 'allradio');
 };
 
 
-exports.kodiSearchYoutube = (request, response) => { // eslint-disable-line no-unused-vars
+export const kodiSearchYoutube = (request, response) => { // eslint-disable-line no-unused-vars
     let searchString = request.query.q.trim();
     let kodi = request.kodi;
 
@@ -1232,7 +1230,7 @@ exports.kodiSearchYoutube = (request, response) => { // eslint-disable-line no-u
         `plugin://plugin.video.youtube/kodion/search/query?q=${searchString}`, kodi);
 };
 
-exports.kodiPlayYoutube = (request, response) => { // eslint-disable-line no-unused-vars
+export const kodiPlayYoutube = (request, response) => { // eslint-disable-line no-unused-vars
     let searchString = request.query.q.trim();
     let maxItems = request.query.max !== undefined ? parseInt(request.query.max) : 15;
     let kodi = request.kodi;
@@ -1296,13 +1294,13 @@ exports.kodiPlayYoutube = (request, response) => { // eslint-disable-line no-unu
     });
 };
 
-exports.kodiShutdown = (request) => request.kodi.System.Shutdown(); // eslint-disable-line new-cap
-exports.kodiHibernate = (request) => request.kodi.System.Hibernate(); // eslint-disable-line new-cap
-exports.kodiReboot = (request) => request.kodi.System.Reboot(); // eslint-disable-line new-cap
-exports.kodiSuspend = (request) => request.kodi.System.Suspend(); // eslint-disable-line new-cap
+export const kodiShutdown = (request) => request.kodi.System.Shutdown(); // eslint-disable-line new-cap
+export const kodiHibernate = (request) => request.kodi.System.Hibernate(); // eslint-disable-line new-cap
+export const kodiReboot = (request) => request.kodi.System.Reboot(); // eslint-disable-line new-cap
+export const kodiSuspend = (request) => request.kodi.System.Suspend(); // eslint-disable-line new-cap
 
 
-exports.kodiPlayMusicByGenre = (request) => {
+export const kodiPlayMusicByGenre = (request) => {
 
     let Kodi = request.kodi;
     let requestedGenre = request.query.q;
@@ -1315,7 +1313,7 @@ exports.kodiPlayMusicByGenre = (request) => {
 
 };
 
-exports.kodiShowMovieGenre = (request) => { // eslint-disable-line no-unused-vars
+export const kodiShowMovieGenre = (request) => { // eslint-disable-line no-unused-vars
 
     let Kodi = request.kodi;
     let requestedGenre = request.query.q;
@@ -1330,7 +1328,7 @@ exports.kodiShowMovieGenre = (request) => { // eslint-disable-line no-unused-var
         }));
 };
 
-exports.kodiLoadProfile = (request) => {
+export const kodiLoadProfile = (request) => {
     let Kodi = request.kodi;
     let requestedProfile = request.query.q;
 
@@ -1343,14 +1341,14 @@ exports.kodiLoadProfile = (request) => {
         }));
 };
 
-const kodiGetAddons = (kodi) => {
+export const kodiGetAddons = (kodi) => {
     return kodi.Addons.GetAddons({ // eslint-disable-line new-cap
         properties: ['enabled', 'name']
     })
         .then((kodiResponse) => kodiResponse.result.addons);
 };
 
-const removeNotExecuteableAddons = (addons) => {
+export const removeNotExecuteableAddons = (addons) => {
     return addons
         .filter((addon) => addon.enabled)
         .filter((addon) => !addon.type.startsWith('kodi.resource'))
@@ -1360,13 +1358,13 @@ const removeNotExecuteableAddons = (addons) => {
         .filter((addon) => !addon.type.startsWith('xbmc.service'));
 };
 
-const executeAddon = (kodi, addon) => {
+export const executeAddon = (kodi, addon) => {
     return kodi.Addons.ExecuteAddon({ // eslint-disable-line new-cap
         addonid: addon.addonid
     });
 };
 
-exports.kodiExecuteAddon = (request) => {
+export const kodiExecuteAddon = (request) => {
 
     let kodi = request.kodi;
     let requestedAddon = request.query.q;
@@ -1378,14 +1376,14 @@ exports.kodiExecuteAddon = (request) => {
         .then((addon) => executeAddon(kodi, addon));
 };
 
-const togglePartyMode = (kodi, playerid) => {
+export const togglePartyMode = (kodi, playerid) => {
     return kodi.Player.SetPartymode({ // eslint-disable-line new-cap
         playerid: playerid,
         partymode: 'toggle'
     });
 };
 
-exports.kodiTogglePartymode = (request) => {
+export const kodiTogglePartymode = (request) => {
     let kodi = request.kodi;
 
     console.log('requested partymode toggle');
@@ -1396,7 +1394,7 @@ exports.kodiTogglePartymode = (request) => {
         .then((playerid) => togglePartyMode(kodi, playerid));
 };
 
-exports.kodiToggleFullscreen = (request) => { // eslint-disable-line no-unused-vars
+export const kodiToggleFullscreen = (request) => { // eslint-disable-line no-unused-vars
     console.log('Toggle Fullscreen request received');
     let Kodi = request.kodi;
 
@@ -1405,7 +1403,7 @@ exports.kodiToggleFullscreen = (request) => { // eslint-disable-line no-unused-v
     });
 };
 
-const kodiFindFavourite = (request, favouriteName) => {
+export const kodiFindFavourite = (request, favouriteName) => {
     let Kodi = request.kodi;
 
     return Kodi.Favourites.GetFavourites({ // eslint-disable-line new-cap
@@ -1419,7 +1417,7 @@ const kodiFindFavourite = (request, favouriteName) => {
     });
 };
 
-const playFavourite = (request, favourite) => {
+export const playFavourite = (request, favourite) => {
     console.log(`opening media type favourite "${favourite.title}"`);
     if (favourite.type === 'media') {
         return request.kodi.Player.Open({ // eslint-disable-line new-cap
@@ -1439,7 +1437,7 @@ const playFavourite = (request, favourite) => {
 };
 
 
-exports.kodiOpenFavourite = (request, response) => { // eslint-disable-line no-unused-vars
+export const kodiOpenFavourite = (request, response) => { // eslint-disable-line no-unused-vars
     let favouriteName = request.query.q;
 
     console.log('requested favourite:', favouriteName);
@@ -1449,7 +1447,7 @@ exports.kodiOpenFavourite = (request, response) => { // eslint-disable-line no-u
 };
 
 
-exports.listRoutes = function(request, response) {
+export const listRoutes = function(request, response) {
     let routes = request
         .app._router.stack
         .filter((x) => x.route && x.route.path)
@@ -1472,14 +1470,14 @@ exports.listRoutes = function(request, response) {
 };
 
 
-exports.kodiSearchSerenForShows = function(request, response) { // eslint-disable-line no-unused-vars
+export const kodiSearchSerenForShows = function(request, response) { // eslint-disable-line no-unused-vars
     let searchString = request.query.q.trim(); // eslint-disable-line no-unused-vars
     let Kodi = request.kodi;
     const params = 'plugin://plugin.video.seren?action=showsSearch&actionArgs=$(searchString}';
     return kodiOpenVideoWindow(params, Kodi);
 };
 
-exports.kodiSearchSerenForMovies = (request, response) => { // eslint-disable-line no-unused-vars
+export const kodiSearchSerenForMovies = (request, response) => { // eslint-disable-line no-unused-vars
     let searchString = request.query.q.trim(); // eslint-disable-line no-unused-vars
     let Kodi = request.kodi;
     const params = 'plugin://plugin.video.seren?action=moviesSearch&actionArgs=${searchString}';

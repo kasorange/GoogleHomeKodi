@@ -1,7 +1,5 @@
-'use strict';
-
-const express = require('express');
-const Fuse = require('fuse.js');
+import express from 'express';
+import Fuse from 'fuse.js';
 
 
 // Set option for fuzzy search
@@ -104,7 +102,7 @@ const listBooleanSettings = (request, response) => {
 };
 
 
-exports.build = (exec) => {
+const build = (exec) => {
     const app = express();
 
     app.set('json spaces', 2);
@@ -116,3 +114,5 @@ exports.build = (exec) => {
 
     return app;
 };
+
+export default build;

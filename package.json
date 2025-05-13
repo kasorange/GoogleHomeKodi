@@ -9,26 +9,26 @@
     "test": "mocha --recursive --require should"
   },
   "dependencies": {
-    "axios": "^1.7.9",
-    "body-parser": "^1.19.0",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "fast-xml-parser": "^4.5.1",
-    "fuse.js": "^5.2.1",
-    "node-fetch": "^2.6.0",
+    "axios": "^1.6.7",
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.4.5",
+    "express": "^4.18.2",
+    "fast-xml-parser": "^4.3.2",
+    "fuse.js": "^7.0.0",
+    "node-fetch": "^3.3.2",
     "words-to-numbers": "^1.5.1",
     "youtube-search": "^1.1.4",
     "remove-accents": "^0.4.2"
   },
   "devDependencies": {
-    "babel-eslint": "^10.1.0",
-    "eslint": "^6.8.0",
-    "mocha": "^11.0.1",
-    "node-mocks-http": "^1.8.1",
+    "@babel/eslint-parser": "^7.23.10",
+    "eslint": "^8.57.0",
+    "mocha": "^10.3.0",
+    "node-mocks-http": "^1.13.0",
     "should": "^13.2.3"
   },
   "engines": {
-    "node": "^13.9.0"
+    "node": ">=18.0.0"
   },
   "repository": {
     "url": "https://github.com/OmerTu/GoogleHomeKodi"
@@ -38,5 +38,6 @@
     "Kodi",
     "Google Home",
     "IFTTT"
-  ]
+  ],
+  "type": "module"
 }
