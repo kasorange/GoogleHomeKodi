@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 dotenv.config();
-import * as Kodi from './kodi-connection/node.js';
+import Kodi from './kodi-connection/node.js';
 
 let kodiConfig = [];
 let globalConfig = {};

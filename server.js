@@ -2,10 +2,15 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import * as Helper from './helpers.js';
 import * as Broker from './broker.js';
-import * as LoadConfig from './config.js';
-import * as SettingsApp from './apps/settings.js';
+import LoadConfig from './config.js';
+import settingsBuild from './apps/settings.js';
 import * as TagesschauApp from './apps/tagesschau.js';
 import { ResponseException } from './exceptions.js';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const config = new LoadConfig();
@@ -89,7 +94,7 @@ const selectKodiInstance = function(request, response, next) {
 const allRoutesExceptRoot = /\/.+/;
 
 app.use(bodyParser.json());
-app.use(express.static(`${__dirname}/views`));
+app.use(express.static(path.join(__dirname, 'views')));
 
 app.use('/listRoutes', Helper.listRoutes);
 
@@ -297,7 +302,7 @@ app.all('/playfavourite', exec(Helper.kodiOpenFavourite));
 // broker for parsing all phrases
 app.all('/broker', exec(Broker.processRequest));
 
-app.use('/settings', SettingsApp.build(exec));
+app.use('/settings', settingsBuild(exec));
 
 app.use('/tagesschau', TagesschauApp.build(exec));
 
