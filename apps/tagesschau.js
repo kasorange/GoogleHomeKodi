@@ -1,5 +1,10 @@
 'use strict';
 
+import express from 'express';
+import axios from 'axios';
+import { XMLParser } from 'fast-xml-parser';
+
+const feedUrl = 'https://www.tagesschau.de/export/video-podcast/webxl/tagesschau_https/';
 
 const playFile = (request, fileName) => {
     return request.kodi.Player.Open({ // eslint-disable-line new-cap
@@ -12,7 +17,6 @@ const playFile = (request, fileName) => {
     });
 };
 
-
 const showNotification = (request, response, message, image) => {
     let param = {
         title: 'GoogleHomeKodi',
@@ -22,13 +26,6 @@ const showNotification = (request, response, message, image) => {
 
     return request.kodi.GUI.ShowNotification(param); // eslint-disable-line new-cap
 };
-
-
-import express from 'express';
-import axios from 'axios';
-import { XMLParser } from 'fast-xml-parser';
-
-const feedUrl = 'https://www.tagesschau.de/export/video-podcast/webxl/tagesschau_https/';
 
 const fetchAndPlayTodaysBroadcast = async(request) => {
     let feedContent = await axios.get(feedUrl);
@@ -49,7 +46,7 @@ const fetchAndPlayTodaysBroadcast = async(request) => {
     return showNotification(request, response, 'Heutige Ausgabe noch nicht online', 'error');
 };
 
-exports.build = (exec) => {
+export const build = (exec) => {
     const app = express();
 
     app.set('json spaces', 2);

@@ -1,4 +1,4 @@
-import { wordsToNumbers } from 'words-to-numbers';
+import { wordsToNumbers } from './number-converter.js';
 import axios from 'axios';
 import Fuse from 'fuse.js';
 import { getFlatWindows } from './kodi-connection/windows.js';
